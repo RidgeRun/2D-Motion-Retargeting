@@ -68,21 +68,23 @@ class Config:
         self.model_dir = os.path.join(self.exp_dir, 'model/')
         utils.ensure_dirs([self.log_dir, self.model_dir])
 
+        filepath = os.path.dirname(os.path.realpath(__file__))
+
         if self.name == 'skeleton':
             self.mot_en_channels = [self.len_joints + 2, 64, 96, 128]
             self.body_en_channels = [self.len_joints, 32, 48, 64]
             self.de_channels = [self.mot_en_channels[-1] + self.body_en_channels[-1], 128, 64, self.len_joints + 2]
             self.view_angles = None
 
-            self.meanpose_path = './mixamo_data/meanpose.npy'
-            self.stdpose_path = './mixamo_data/stdpose.npy'
+            self.meanpose_path = filepath + "/mixamo_data/meanpose.npy"
+            self.stdpose_path = filepath + "/mixamo_data/stdpose.npy"
         elif self.name == 'view':
             self.mot_en_channels = [self.len_joints + 2, 64, 96, 128]
             self.view_en_channels = [self.len_joints, 64, 96, 128, 32]
             self.de_channels = [self.mot_en_channels[-1] + self.view_en_channels[-1], 128, 64, self.len_joints + 2]
 
-            self.meanpose_path = './mixamo_data/meanpose_with_view.npy'
-            self.stdpose_path = './mixamo_data/stdpose_with_view.npy'
+            self.meanpose_path = filepath + "/mixamo_data/meanpose_with_view.npy"
+            self.stdpose_path = filepath + "/mixamo_data/stdpose_with_view.npy"
         else:
             self.mot_en_channels = [self.len_joints + 2, 64, 96, 128]
             self.body_en_channels = [self.len_joints, 32, 48, 64, 16]
@@ -90,8 +92,7 @@ class Config:
             self.de_channels = [self.mot_en_channels[-1] + self.body_en_channels[-1] + self.view_en_channels[-1],
                                 128, 64, self.len_joints + 2]
 
-            self.meanpose_path = './mixamo_data/meanpose_with_view.npy'
-            self.stdpose_path = './mixamo_data/stdpose_with_view.npy'
-
+            self.meanpose_path = filepath + "/mixamo_data/meanpose_with_view.npy"
+            self.stdpose_path = filepath + "/mixamo_data/stdpose_with_view.npy"
 
 config = Config()
